@@ -1,19 +1,21 @@
 class PostsController < ApplicationController
+    #To make the “find_post” helper methods available to the Controller action
+    before_action :find_post, only: [:show, :edit, :update, :destroy]
+    
+    def index
+        @posts = Post.all
+    end
+    
     def new
         @post = Post.new
     end
 
-    def index
-        @posts = Post.all
-    end
-
+    # this action looks empty, but it’s not, because of the before_action.
     def show
-        @post = Post.find(params[:id])
     end
 
     def create
-        @post = Post.new(params[:post])
-
+        @post = Post.new(post_params)
         if @post.save
             flash[:notice] = "Post created!"
             redirect to @post
@@ -21,22 +23,32 @@ class PostsController < ApplicationController
             render 'new'
         end
     end
-
-        flash[:notice] = "Post created!"
-        #add a redirect later
+    # this action looks empty, but it’s not, because of the before_action.
+    def edit       
     end
 
-    def edit
-        post = Post.find(params[:id])
-        post.update(params[:post])
-        flash[:notice] = "Updated post."
-        #add a redirect later
+    def update
+        if @post.update(post_params)
+            flash[:notice] = "Post updated!"
+            redirect to @post
+        else
+            render 'edit'
+        end
     end
 
     def destory
-    Post.find(params[:id]).destory
-    flash[:notice] = "Post deleted"
-    #add a redirect later
+    @post.destroy
+    flash[:notice] = "Post deleted!"
+    redirect_to root_path
     end
 
+private
+#helper methods
+    def post_params
+        params.require(:post).permit(:title, :body, :user_id)
+    end
+
+    def find_post
+        @post =Post.find(params[:id])
+    end
 end

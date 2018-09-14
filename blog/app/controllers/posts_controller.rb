@@ -3,7 +3,7 @@ class PostsController < ApplicationController
     before_action :find_post, only: [:show, :edit, :update, :destroy]
     
     def index
-        @posts = Post.all
+        @posts = Post.all.reverse
     end
     
     def new
@@ -15,10 +15,11 @@ class PostsController < ApplicationController
     end
 
     def create
-        @post = Post.new(post_params)
+        @post = Post.create(post_params)
+        @post.user_id = session[:user_id]
         if @post.save
             flash[:notice] = "Post created!"
-            redirect to @post
+            redirect_to '/'
         else
             render 'new'
         end
@@ -30,13 +31,14 @@ class PostsController < ApplicationController
     def update
         if @post.update(post_params)
             flash[:notice] = "Post updated!"
-            redirect to @post
+            redirect_to @post
+            
         else
             render 'edit'
         end
     end
 
-    def destory
+    def destroy
     @post.destroy
     flash[:notice] = "Post deleted!"
     redirect_to root_path
@@ -45,6 +47,8 @@ class PostsController < ApplicationController
 private
 #helper methods
     def post_params
+        ##trying this out
+        user = User.find(session[:user_id])
         params.require(:post).permit(:title, :body, :user_id)
     end
 

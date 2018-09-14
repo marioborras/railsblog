@@ -12,7 +12,16 @@ class UsersController < ApplicationController
     # this action looks empty, but it’s not, because of the before_action.
     def show
     end
-    
+
+    def create
+        @user = User.new(user_params)
+        if @user.save
+            flash[:notice] = "User created!"
+            redirect_to @user
+        else
+            render 'new'
+        end
+    end
 
     #GET request /users/:id/edit
     # this action looks empty, but it’s not, because of the before_action.
@@ -30,15 +39,7 @@ class UsersController < ApplicationController
         end
     end
 
-    def create
-        @user = User.new(params[post_params])
-        if @user.save
-            flash[:notice] = "User created!"
-            redirect to @user
-        else
-            render 'new'
-        end
-    end
+    
 
     def destroy
         @user.destory

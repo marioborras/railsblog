@@ -1,5 +1,6 @@
 <h1> All posts</h1>
 <%@posts.each do |post|%>
-<h1><%= link_to "post.title", post%></h1>
+<h1><%= link_to post.title, post%></h1>
 <p><%=post.body%></p>
+<p>By: <%=post.user.username%>
 <% end %>

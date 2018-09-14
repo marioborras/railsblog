@@ -8,26 +8,22 @@ class CommentsController < ApplicationController
     end
 
     def new
-        @comment = Comment.new
+        @comment = Comment.new(post_id: params[:post_id])
     end
     # this action looks empty, but it’s not, because of the before_action.
     def show
     end
 
     def create
-        # @post = Post.find(params[:post_id])
-        # @comment = @post.comment.create(params[:comment].permit(:comment))
-        # @comment.user_id = session[:user_id]
-        @comment =Comment.create(comment_params)
+        @comment = Comment.create(comment_params)
         @comment.user_id = session[:user_id]
+        if @comment.save
+        flash[:notice] = "Comment made!"
         redirect_to "/"
-        # @comment.post_id =Post.find(params[:id])
-        # if @comment.save
-        #     flash[:notice] = "Comment created!"
-        #     redirect to '/'
-        # else
-        #     render 'new'
-        # end
+        else 
+        flash[:notice] = "Some error happened"
+        redirect_to '/new'
+        end
     end
 
 

@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     end
 
     def create
-        @user = User.new(user_params)
+        @user = User.new(user_pOrams)
         if @user.save
             flash[:notice] = "User created!"
             redirect_to @user

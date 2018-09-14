@@ -8,6 +8,8 @@ class PostsController < ApplicationController
     
     def new
         @post = Post.new
+        @comment = Comment.new(post_id: params[:post_id])
+        @comment.user_id = session[:user_id]
     end
 
     # this action looks empty, but it’s not, because of the before_action.
@@ -47,8 +49,6 @@ class PostsController < ApplicationController
 private
 #helper methods
     def post_params
-        ##trying this out
-        user = User.find(session[:user_id])
         params.require(:post).permit(:title, :body, :user_id)
     end
 

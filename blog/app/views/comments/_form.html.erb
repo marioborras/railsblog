@@ -1,0 +1,7 @@
+<%=form_for(@comment) do |f|%>
+
+    <%= f.label :body %><br>
+    <%= f.text_area :body, size: "60x12", placeholder:  "What is on your mind?" %><br>
+    <%= f.hidden_field :post_id %>
+    <%= f.button :submit %>
+<%end%>

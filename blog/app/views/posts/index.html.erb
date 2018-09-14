@@ -3,4 +3,5 @@
 <h1><%= link_to post.title, post%></h1>
 <p><%=post.body%></p>
 <p>By: <%=post.user.username%>
+<%=link_to 'Leave a comment', new_comment_path(post_id: post.id)%>
 <% end %>

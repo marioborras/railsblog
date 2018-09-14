@@ -2,5 +2,9 @@
 
 <h1><%= @post.title %></h1>
 <p><%= @post.body %></p>
+<p>Comments:</p>
+<% @post.comments.reverse.each do |comment|%>
+<p><%=comment.user.username%> said: <%= comment.body %></p>
+<% end %>
 <%= link_to "Edit", edit_post_path(@post) %>
 <%= link_to "Delete", @post, method: :delete, data: { confirm: "Are you sure?"} %>

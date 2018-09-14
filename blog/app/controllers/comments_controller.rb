@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-
     before_action :find_comment, 
     only: [:show, :edit, :update, :destroy]
 
@@ -10,6 +9,7 @@ class CommentsController < ApplicationController
     def new
         @comment = Comment.new(post_id: params[:post_id])
     end
+
     # this action looks empty, but it’s not, because of the before_action.
     def show
     end
@@ -26,7 +26,6 @@ class CommentsController < ApplicationController
         end
     end
 
-
     def update
         if @comment.update(comment_params)
             flash[:notice] = "Comment updated!"
@@ -34,7 +33,6 @@ class CommentsController < ApplicationController
         else
             render 'edit'
         end
-
     end
 
     def destroy
@@ -50,5 +48,4 @@ private
     def find_comment
         @comment =Comment.find(params[:id])
     end
-
 end

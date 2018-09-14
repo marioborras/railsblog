@@ -12,6 +12,7 @@ class PostsController < ApplicationController
 
     # this action looks empty, but it’s not, because of the before_action.
     def show
+        # @comments = Comments.where(params[:post_id])
     end
 
     def create

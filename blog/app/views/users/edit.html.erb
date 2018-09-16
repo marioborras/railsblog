@@ -1,3 +1,6 @@
+
+<h2>Edit Your Account Here</h2>
 <%= render "form" %>
-<%= link_to "Delete your account", @user, method: :delete, data: { confirm: "Are you sure?"} %>
+<br>
+<%= link_to "Delete your account", @user, method: :delete, class: "waves-effect waves-light red btn", data: { confirm: "Are you sure?"} %>
 <% link_to "Back", root_path %>

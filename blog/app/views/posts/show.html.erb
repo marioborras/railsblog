@@ -1,14 +1,24 @@
-<h1>The show posts Page</h1>
-
-<h1><%= @post.title %></h1>
-<p><%= @post.body %></p>
+<h2><%= @post.title %></h2> 
+<h4>Posted by: <%=@post.user.username %></h4>
+<table>
+    <thead>
+        <tr>
+<th><%= @post.body %></th>
 <% if @post.user_id == session[:user_id] %>
-<%= link_to "Edit your post", edit_post_path(@post) %>
-<%= link_to "Delete your post", @post, method: :delete, data: { confirm: "Are you sure?"} %>
+<th>
+<%= link_to "Edit", edit_post_path(@post) %>
+<%= link_to "Delete", @post, method: :delete, data: { confirm: "Are you sure?"} %>
 <%end%>
+</th>
+</tr>
+</thead>
+</table>
 <p>Comments:</p>
-<% @post.comments.reverse.each do |comment|%>
 
+<% @post.comments.each do |comment|%>
 <p><%=comment.user.username%> said: <%= comment.body %></p>
+<div class="divider"></div>
+<div class="section">
+</div>
 <% end %>
 <%=link_to 'Leave a comment', new_comment_path(post_id: @post.id)%>

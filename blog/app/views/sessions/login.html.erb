@@ -1,6 +1,10 @@
+<body class="splash"></body>
 
+<h1>Welcome to minimalist blog</h1>
 <div id="sign-in">
-<p>Welcome to minimalist blog</p>
-    <%=link_to 'Sign in', new_session_path%><br>
-    <%=link_to 'Create account', new_user_path%>
+    <%=link_to 'Sign in', new_session_path, class: "waves-effect waves-light btn"%>
+    <br><br>
+    <%=link_to 'Create account', new_user_path, class: "waves-effect waves-light btn"%>
 </div>
+
+

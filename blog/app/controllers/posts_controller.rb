@@ -3,16 +3,18 @@ class PostsController < ApplicationController
     before_action :find_post, only: [:show, :edit, :update, :destroy]
     
     def index
+        # @current_user = current_user
         @posts = Post.all.reverse
     end
     
     def new
         @post = Post.new
+        # @current_user = current_user
     end
 
     # this action looks empty, but it’s not, because of the before_action.
     def show
-        # @comments = Comments.where(params[:post_id])
+        # @current_user = current_user
     end
 
     def create
@@ -20,7 +22,7 @@ class PostsController < ApplicationController
         @post.user_id = session[:user_id]
         if @post.save
             flash[:notice] = "Post created!"
-            redirect_to '/'
+            redirect_to '/posts'
         else
             render 'new'
         end

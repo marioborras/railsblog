@@ -8,6 +8,7 @@ class CommentsController < ApplicationController
 
     def new
         @comment = Comment.new(post_id: params[:post_id])
+        @current_user = current_user
     end
 
     # this action looks empty, but it’s not, because of the before_action.
@@ -19,7 +20,7 @@ class CommentsController < ApplicationController
         @comment.user_id = session[:user_id]
         if @comment.save
         flash[:notice] = "Comment made!"
-        redirect_to "/"
+        redirect_back(fallback_location: root_path)
         else 
         flash[:notice] = "Some error happened"
         redirect_to '/new'

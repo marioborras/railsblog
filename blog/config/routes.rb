@@ -3,8 +3,10 @@ Rails.application.routes.draw do
   resources :posts
   resources :comments
   resources :users
-root 'posts#index'
+  
+root 'sessions#login'
 get '/signin' => 'sessions#new', as: :new_session
 post '/create-session' => 'sessions#create', as: :create_session
 get '/signout' => 'sessions#destroy', as: :destroy_session
+
 end

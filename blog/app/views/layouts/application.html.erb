@@ -17,10 +17,10 @@
     hey you're logged in
     <%=link_to 'Sign out', destroy_session_path%>
     <%=link_to 'Post something', new_post_path%>
-    <%else%>
-    <%=link_to 'Sign in', new_session_path%>
-    <%=link_to 'Create account', new_user_path%>
+    <%=link_to 'All posts', posts_path%>
     <%end%>
+    <div id="main">
     <%= yield %>
+    </div>
   </body>
 </html>

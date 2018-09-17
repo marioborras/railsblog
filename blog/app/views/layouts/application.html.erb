@@ -24,6 +24,9 @@
           </ul>
         </div>
       </nav>
+       <% if flash[:notice] %>
+    <div id="notice"><%= flash[:notice]%></div>
+    <%end%>
     <%end%>
   <div class="container">
     <%= yield %>

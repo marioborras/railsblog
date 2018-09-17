@@ -3,7 +3,6 @@ class PostsController < ApplicationController
     before_action :find_post, only: [:show, :edit, :update, :destroy]
     
     def index
-        # @current_user = current_user
         @posts = Post.all.reverse
         @current_user = current_user
 

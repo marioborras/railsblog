@@ -15,15 +15,19 @@ class UsersController < ApplicationController
     # this action looks empty, but it’s not, because of the before_action.
     def show
         signed_out_signin_path
+        @current_user = current_user
+
     end
 
     def create
-        @user = User.new(user_params)
-        if @user.save
+        user = User.new(user_params)
+        if user.save
             flash[:notice] = "User created!"
-            redirect_to @user
+            redirect_to user
         else
-            render 'new'
+            flash[:notice] = "There was an error. "
+            flash[:notice] += user.errors.full_messages.join(',')
+            redirect_to new_user_path
         end
     end
 
@@ -40,9 +44,12 @@ class UsersController < ApplicationController
         @user.update(user_params)
         if @user.update(user_params)
             flash[:notice] = "Account updated!"
-            redirect_to @user
+            redirect_to root_path
         else
-            render 'edit'
+            # render 'edit'
+            flash[:notice] = "There was an error. "
+            flash[:notice] += @user.errors.full_messages.join(', ')
+            redirect_back(fallback_location: edit_user_path(@user))
         end
     end
 
@@ -66,7 +73,7 @@ end
 private 
 #helper methods
     def user_params
-        params.require(:user).permit(:username,:email, :password)
+        params.require(:user).permit(:username,:email, :password,  :password_confirmation)
     end
 
     def find_user

@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     if user.present? && user.password == params[:password]
     session[:user_id] = user.id
     flash[:notice] = "Logged in!"
-    redirect_to users_path
+    redirect_to posts_path
     else
     flash[:notice] = "Email or password didn't match"
     redirect_to new_session_path

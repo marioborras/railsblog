@@ -5,16 +5,18 @@ class PostsController < ApplicationController
     def index
         # @current_user = current_user
         @posts = Post.all.reverse
+        @current_user = current_user
+
     end
     
     def new
         @post = Post.new
-        # @current_user = current_user
+        @current_user = current_user
     end
 
     # this action looks empty, but it’s not, because of the before_action.
     def show
-        # @current_user = current_user
+        @current_user = current_user
     end
 
     def create
@@ -28,7 +30,9 @@ class PostsController < ApplicationController
         end
     end
     # this action looks empty, but it’s not, because of the before_action.
-    def edit       
+    def edit
+        @current_user = current_user
+       
     end
 
     def update
